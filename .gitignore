@@ -9,5 +9,6 @@
 /Application/Common/Conf/config.php
 
 /php-excel-master
+/.idea
 
 env.php

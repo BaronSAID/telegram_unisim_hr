@@ -1,5 +1,5 @@
 <?php
-// https://api.telegram.org/bot5698196318:AAE7MtedoaBXHn7UmT4j2fv8-ZlIeG8jxOc/setWebhook?url=https://una.md/iRuta-devel/telegram_unisim_hr/bot.php
+// https://api.telegram.org/bot<G_API_TOKEN>/setWebhook?url=https://una.md/iRuta-devel/telegram_unisim_hr/bot.php
 
 const G_ORA_USER = "otrs"; // Oracle User
 const G_ORA_PASS = ""; // Oracle password

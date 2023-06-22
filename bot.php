@@ -48,9 +48,6 @@ if($text){
         insert_plan($name, $chat_id, $text, $v_date_msg);
         $reply ='Planul zilei trimis anterior VA FI PARTAJAT pe E-Mail la Administratia Unisim in decurs de 5-10 minute';
         $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
-    } else {
-        	$reply = $msg2;
-        	$telegram->sendMessage([ 'chat_id' => $chat_id, 'parse_mode'=> 'HTML', 'text' => $reply ]);
     }
 } else {
     $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $msg ]);

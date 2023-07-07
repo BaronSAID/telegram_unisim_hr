@@ -18,3 +18,28 @@ Acest cod reprezintă un bot Telegram care permite utilizatorilor să partajeze 
 Este important să aveți o bază de date Oracle configurată corespunzător și să asigurați că structurile tabelare menționate mai sus există în baza de date.
 
 Pentru orice întrebări sau probleme legate de utilizarea botului Telegram, vă rugăm să consultați documentația oficială a API-ului Telegram Bot.
+
+## RAPORT ZILNIC
+
+### Functionalitatea fisierului send_message.php
+Acest fișier primește un parametru ID prin metoda GET și caută în baza de date (DB) în tabela vraport_hr_otrs mesajul care trebuie trimis de către chat bot și ID-ul chat-ului în care se trimite acest mesaj.
+
+## Tabelul vraport_hr_otrs
+
+Tabela vraport_hr_otrs este completată la trimiterea raportului zilnic din OTRS cu comanda `#raportulmeuzilnic`. Completarea acestui tabel se face atât când se trimite raportul automat, cât și când se trimite manual. Funcția care completează tabela este `pkg_ticket_mail.fill_RAPORT_HR_OTRS`.
+
+## Trimiterea mesajului
+
+Pentru trimiterea mesajului, se folosește procedura `pkg_ticket_mail.send_message_hr`. Această procedură este utilizată și în momentul trimiterii automate a rapoartelor zilnice, mesajele fiind trimise în chat.
+
+## Tabelul TELEGRAM_HR_USERS
+
+Pentru ca mesajele să fie trimise cu succes, este necesar ca în tabelul TELEGRAM_HR_USERS să fie completate datele necesare. Aceste date includ:
+- `telegram_user` - utilizatorul angajat din Telegram
+- `otrs_user` - ID-ul angajatului din OTRS
+- `id_chat_telegram` - ID-ul chat-ului Telegram
+
+Valorile pentru `telegram_user` și `id_chat_telegram` pot fi obținute în chat-ul Telegram prin apelarea comenzii `/info`.
+
+Tabelul TELEGRAM_HR_USERS poate fi completat atât direct din baza de date, cât și din aplicația UNA (Backoffice) din forma 20->20.6, 20.6 Lista OTRS - Telegram pentru Planuri de lucru.
+

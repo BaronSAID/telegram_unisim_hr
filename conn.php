@@ -17,3 +17,14 @@ values
 
     return $res;
 }
+
+function get_massege_by_id($id){
+    global $olink;
+    $query = 'select * from vraport_hr_otrs o where o.id_mesage = '.$id;
+    $stmt = oci_parse($olink, $query);
+    oci_execute($stmt, OCI_DEFAULT);
+    $data_xls = array();
+    while ($row_xls = oci_fetch_row($stmt))
+        $data_xls[] = $row_xls;
+    return $data_xls;
+};

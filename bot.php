@@ -10,11 +10,16 @@ use Telegram\Bot\Api;
 function getPlanFromMessage($p_text) {
     $v_variabile = G_LIST_KEY_PLAN;
 
+    $p_text = strtolower($p_text);
+
     foreach ($v_variabile as $variabila) {
+        $variabila = strtolower($variabila);
+
         if (stripos($p_text, $variabila) !== false) {
             return true;
         }
     }
+
     return false;
 }
 

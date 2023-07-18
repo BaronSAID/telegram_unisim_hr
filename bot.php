@@ -55,7 +55,7 @@ if($text){
         $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
     }
 } else {
-    $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $msg ]);
+    echo 1;
 }
 
 

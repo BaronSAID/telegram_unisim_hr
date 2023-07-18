@@ -17,7 +17,7 @@ $chatId = $db_message[0][4];
 
 $v_message_body = $foo=iconv('windows-1251','utf-8',$db_message[0][2]);
 
-$message = $db_message[0][3]."\n ".$v_message_body;
+$message = $db_message[0][3]."\n\n ".$v_message_body;
 
 $response = $telegram->sendMessage([
     'chat_id' => $chatId,

@@ -17,11 +17,12 @@ $chatId = $db_message[0][4];
 
 $v_message_body = $foo=iconv('windows-1251','utf-8',$db_message[0][2]);
 
-$message = $db_message[0][3]."\n\n ".$v_message_body;
+$message = $db_message[0][3].chr(10).$v_message_body;
 
 $response = $telegram->sendMessage([
     'chat_id' => $chatId,
-    'text' => $message
+    'text' => $message,
+    'parse_mode'=>'Markdown'
 ]);
 
 if ($response->getDate() <> null) {

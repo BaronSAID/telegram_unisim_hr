@@ -28,3 +28,32 @@ function get_massege_by_id($id){
         $data_xls[] = $row_xls;
     return $data_xls;
 };
+
+function get_otrs_comment_by_user($id, $data){
+    global $olink;
+    $query = "select rownum rn
+                   , a.*
+                   , CASE WHEN a.NTICKET IS NOT NULL THEN 1 ELSE 0 END AS is_sum
+  from (
+  select t.NTICKET
+        ,t.WCOMMENT
+        , e.ievent_ru
+        ,TO_CHAR(t.DATEST, 'DD-MM-YYYY HH24:MI:SS') DATEST
+        ,TO_CHAR(t.DATEEND, 'DD-MM-YYYY HH24:MI:SS') DATEEND
+        ,t.TIME_ELAPS
+        ,TO_CHAR(t.DATEST_SYSTEM, 'DD-MM-YYYY HH24:MI:SS') DATEST_SYSTEM
+        ,(select s.last_name||' '||s.first_name from system_user s where s.id=t.USERID) user_name
+  from VXUSERWORK t, XUSERWORK_EVENTS e
+  where t.userid=".$id."
+    and t.IEVENTID = e.id
+    and trunc(t.datest_system) = '".$data."'
+    --and t.wcomment is not null
+  order by t.id
+) a";
+    $stmt = oci_parse($olink, $query);
+    oci_execute($stmt, OCI_DEFAULT);
+    $data_xls = array();
+    while ($row_xls = oci_fetch_row($stmt))
+        $data_xls[] = $row_xls;
+    return $data_xls;
+};

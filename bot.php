@@ -47,12 +47,34 @@ if($text){
         $reply = $msg;
         $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
 	}elseif ($text == "/info") {
-        $reply =$msg2;
-        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
-    }elseif (getPlanFromMessage($text)) {
-        insert_plan($name, $chat_id, $text, $v_date_msg);
-        $reply ='Planul zilei trimis anterior VA FI PARTAJAT pe E-Mail la Administratia Unisim in decurs de 5-10 minute';
-        $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);
+        $reply = $msg2;
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $reply]);
+    /*}elseif (getPlanFromMessage($text)) {
+            insert_plan($name, $chat_id, $text, $v_date_msg);
+            $reply ='Planul zilei trimis anterior VA FI PARTAJAT pe E-Mail la Administratia Unisim in decurs de 5-10 minute';
+            $telegram->sendMessage([ 'chat_id' => $chat_id, 'text' => $reply ]);*/
+    }elseif ($text == "/tst"){
+        $msg11 = 'Nicolai Gaidarji Lucrari efectuate astazi (08.08.2023):
+
+*Client => IMENSITATE
+Manager => Dragni Violeta*
+*IMENSITATE) #202306291033284 ] Автоматическая отвязка товаров от магазинов (part.2)*
+_- corectarea erorii cind la prelucrarea documentelor prin JOB autoprocess din document dispare user care a creat documentul
+_
+*Client => Gara Tiraspol
+Manager => Tuhari Pavel*
+*Gara Tiraspol) #202308081033742 ] Штраф за незаезд*
+_-Caonsultare cu client, manager (Vadim Cerbari, Victoria N.)  -sysfid 50007 adaugare FX pentru calcularea amenzii dupa formula indicata de client.
+_
+*Client => CONINFO
+Manager => Tuhari Pavel*
+*CONINFO) #202307271033611 ] GARANTIE, crearea native-oracle-php pentru Dorimax*
+_1. Symfony\ Component \ HttpKernel \ Exception \ MethodNotAllowedHttpException, RouteCollection.php (255) 2. Corectari erori din functional Shopcart
+3. Corectare erori pagina admin, activare pe pagina /home categoriile produselor (carusel)
+4. Testare in /admin functional pentru adaugare pagini noi (Blog, Noutati) (de concretizat la D-nul Pavel daca activam aceste pagini pe site)  5. eroare la salvarea termeni si conditii de pastrare:
+_
+';
+        $telegram->sendMessage(['chat_id' => $chat_id, 'text' => $msg11, 'parse_mode'=>'Markdown']);
     }
 } else {
     echo 1;

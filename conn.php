@@ -57,3 +57,14 @@ function get_otrs_comment_by_user($id, $data){
         $data_xls[] = $row_xls;
     return $data_xls;
 };
+
+function get_user_name($p_user_id){
+    global $olink;
+    $query = 'select v.long_name from vraport_hr_otrs v where v.OTRS_USER_ID = '.$p_user_id.' and rownum=1';
+    $stmt = oci_parse($olink, $query);
+    oci_execute($stmt, OCI_DEFAULT);
+    $data_xls = array();
+    while ($row_xls = oci_fetch_row($stmt))
+        $data_xls[] = $row_xls;
+    return $data_xls;
+};

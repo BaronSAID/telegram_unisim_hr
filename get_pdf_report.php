@@ -18,6 +18,9 @@ $data = $_GET['data'];
 $chat_id = $_GET['chat_id'];
 
 $db_comments = get_otrs_comment_by_user($user_id, $data);
+$db_user_name = str_replace(' ', '_', get_user_name($user_id)[0][0]);
+$date_tilte = $data_timestamp = strtotime($data);
+$date_tilte = date('Ymd', $date_tilte);
 $comment_count = count($db_comments);
 $height_page = 140 + ($comment_count*17);
 
@@ -59,15 +62,15 @@ $dompdf->set_option('defaultFont', 'DejaVu Sans'); // Fontul care suportă carac
 $dompdf->render();
 
 // Salvarea PDF-ului pe disk sau afișarea în browser
-//$dompdf->stream('exemplu.pdf', ['Attachment' => 0]);
-
+//$dompdf->stream($date_tilte.'_'.$db_user_name.'_'.$user_id.'.pdf', ['Attachment' => 0]);
+//die();
 $output = $dompdf->output();
-file_put_contents('user_'.$user_id.'.pdf', $output);
+file_put_contents($date_tilte.'_'.$db_user_name.'_'.$user_id.'.pdf', $output);
 
 $response = $telegram->sendDocument([
     'caption'  => 'Raport zilnic, '.$data,
     'chat_id'  => $chat_id,
-    'document' => fopen('user_'.$user_id.'.pdf', 'rb'),
+    'document' => fopen($date_tilte.'_'.$db_user_name.'_'.$user_id.'.pdf', 'rb'),
 ]);
 
 ?>
